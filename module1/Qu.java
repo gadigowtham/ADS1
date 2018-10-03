@@ -1,39 +1,25 @@
-class Qs
+public class Qu
 {
 private int[] id;
-
-public Qs(int N)
+public Qu(int N)
 {
-	id=new int[N];
-	for(int i=0;i<N;i++)
-	{
-		id[i]=i;
-	}
+ id = new int[N];
+for (int i = 0; i < N; i++) id[i] = i;
 }
-public boolean connected(int p,int q)
+private int root(int i)
 {
-	if(id[p]==id[q])
-	{
-	return true;
-	}
-	else
-	{
-		return false;
-	}
-	
+while (i != id[i]) i = id[i];
+return i;
 }
-public void union(int p,int q)
+public boolean find(int p, int q)
 {
-	int pid=id[p];
-	int qid=id[q];
-	
-	for(int i=0;i<id.length;i++)
-	{
-		if(id[i]==pid)
-		{
-			id[i]=qid;
-		}
-	}
+return root(p) == root(q);
+}
+public void unite(int p, int q)
+{
+int i = root(p);
+ int j = root(q);
+ id[i] = j;
 }
 
 public void print()
@@ -44,11 +30,9 @@ public void print()
 	}
 	System.out.print("\n");
 }
-
-}
 public static void main(String[] args)
 {
-System.out.println("QUICK FIND");
+System.out.println("QUICK UNION");
 Qs q = new Qs(10);
 q.union(9,0);
 q.print();
@@ -71,6 +55,4 @@ System.out.println(q.connected(2,4));
 System.out.println(q.connected(7,2));
 System.out.println(q.connected(5,6));
 }
-
-
-	
+}
